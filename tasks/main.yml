@@ -35,6 +35,7 @@
     name: "cabot=={{ cabot.version }}"
     virtualenv: '{{cabot_config.venv_path}}'
     virtualenv_site_packages: no
+  notify: restart cabot
 
 - name: Create config directory
   file:
@@ -50,6 +51,7 @@
     owner: '{{ deploy_user }}'
     mode: 0644
     validate: "/bin/bash -c '. %s'"
+  notify: restart cabot
   tags:
     - config
 
@@ -61,6 +63,7 @@
     - cabot
     - cabot-worker
     - cabot-beat
+  notify: restart cabot
   tags:
     - systemd
 

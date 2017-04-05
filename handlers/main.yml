@@ -1,0 +1,6 @@
+---
+- name: restart cabot
+  systemd:
+    name: cabot
+    state: restarted
+  sudo: true
