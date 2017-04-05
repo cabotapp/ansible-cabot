@@ -1,0 +1,13 @@
+---
+install_postgres: '{{ cabot_install_postgres | default(True) }}'
+
+cabot_config:
+  venv_path: '{{ cabot_config_venv_path | default("/home/ubuntu/venv/") }}'
+  app_path: '{{ cabot_config_app_path | default("/home/ubuntu/cabot/") }}'
+  log_path: '{{ cabot_config_log_path | default("/var/log/cabot/") }}'
+  config_file: '{{ cabot_config_config_file | default("/etc/cabot/config") }}'
+
+cabot:
+  version: '{{ cabot_version | default("HEAD") }}'
+
+deploy_user: ubuntu

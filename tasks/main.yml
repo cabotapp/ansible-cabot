@@ -1,0 +1,115 @@
+---
+- name: Install system packages
+  apt:
+    pkg: '{{ item }}'
+    update_cache: no
+  with_items:
+    - gcc
+    - git
+    - python-dev
+    - python-pip
+    - libpq-dev
+    - ruby1.9.1-full
+    - ruby1.9.3
+    - nodejs
+    - libsasl2-dev
+    - libldap2-dev
+    - libffi-dev
+    - libssl-dev
+  tags:
+    - apt
+
+- name: Install npm packages
+  npm:
+    name: "{{ item }}"
+    global: yes
+    state: present
+  with_items:
+    - coffee-script
+    - less
+
+- name: Ensure log directory exists
+  file:
+    path: '{{ cabot_config.log_path }}'
+    state: directory
+    mode: 0777
+
+- include: postgres.yml
+  when: install_postgres
+
+- name: Deploy Cabot from Git
+  git:
+    repo: https://github.com/arachnys/cabot.git
+    dest: '{{ cabot_config.app_path }}'
+    version: '{{ cabot.version }}'
+  become: yes
+  become_user: '{{ deploy_user }}'
+  tags:
+    - git
+
+- name: Install PIP modules
+  pip:
+    requirements: '{{ cabot_config.app_path }}/{{ item }}'
+    virtualenv: '{{cabot_config.venv_path}}'
+    virtualenv_site_packages: no
+  with_items:
+    - requirements.txt
+    - requirements-plugins.txt
+  sudo: no
+
+- name: Create config directory
+  file:
+    path: '/etc/cabot/'
+    state: directory
+  tags:
+    - config
+
+- name: Deploy Cabot config file
+  template:
+    src: '{{ cabot_config_file_path }}'
+    dest: '{{ cabot_config.config_file }}'
+    owner: '{{ deploy_user }}'
+    mode: 0644
+    validate: "/bin/bash -c '. %s'"
+  tags:
+    - config
+
+- name: Run database migrations
+  shell: source {{ cabot_config.venv_path }}/bin/activate && foreman run -e {{ cabot_config.config_file }} python manage.py {{ item }}
+  args:
+    chdir: '{{ cabot_config.app_path }}'
+    executable: /bin/bash
+  with_items:
+    - syncdb --noinput
+    - migrate cabotapp --noinput
+    - migrate djcelery --noinput
+  sudo: no
+  tags:
+    - django
+
+- name: Run collect_static
+  shell: source {{ cabot_config.venv_path }}/bin/activate && foreman run -e {{ cabot_config.config_file }} python manage.py {{ item }}
+  args:
+    chdir: '{{ cabot_config.app_path }}'
+    executable: /bin/bash
+  with_items:
+    - collectstatic --noinput
+    - compress
+  sudo: no
+  tags:
+    - django
+
+- name: Export upstart scripts
+  shell: foreman export upstart /etc/init -f Procfile -e {{ cabot_config.config_file }} -u '{{ deploy_user }}' -a cabot -t upstart
+  args:
+    chdir: '{{ cabot_config.app_path }}'
+    executable: /bin/bash
+  tags:
+    - upstart
+
+- name: Start Cabot
+  service:
+    name: cabot
+    state: started
+  tags:
+    - upstart
