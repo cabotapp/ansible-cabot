@@ -6,6 +6,11 @@
   with_items:
     - postgresql
 
+- name: Install python-psycopg
+  pip:
+    name: psycopg2
+  become: True
+
 - name: Create database user
   postgresql_user:
     name: cabot

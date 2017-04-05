@@ -1,0 +1,9 @@
+[Unit]
+Description=Cabot
+AssertPathExists={{ cabot_config.venv_path }}
+BindsTo=cabot.service
+After=cabot.service
+
+[Service]
+ExecStart={{ cabot_config.venv_path }}/bin/celery worker -A cabot --loglevel=DEBUG --concurrency=16 -Ofair
+EnvironmentFile={{ cabot_config.config_file }}
