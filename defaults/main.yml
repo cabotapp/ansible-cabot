@@ -7,6 +7,6 @@ cabot_config:
   config_file: '{{ cabot_config_config_file | default("/etc/cabot/config") }}'
 
 cabot:
-  version: '{{ cabot_version | default("HEAD") }}'
+  version: '{{ cabot_version | default("0.10.4") }}'
 
 deploy_user: ubuntu
