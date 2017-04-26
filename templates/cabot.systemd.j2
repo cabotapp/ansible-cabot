@@ -6,7 +6,7 @@ Before=cabot-beat.service cabot-worker.service
 
 [Service]
 ExecStartPre={{ cabot_config.venv_path }}/bin/cabot migrate --no-input
-ExecStart={{ cabot_config.venv_path }}/bin/gunicorn cabot.wsgi:application -b 127.0.0.1:5000
+ExecStart={{ cabot_config.venv_path }}/bin/gunicorn cabot.wsgi:application -b 127.0.0.1:5000 --workers=5
 EnvironmentFile={{ cabot_config.config_file }}
 
 [Install]
