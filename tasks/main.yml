@@ -20,6 +20,9 @@
     - libldap2-dev
     - libffi-dev
     - libssl-dev
+    - coffeescript
+    - node-less
+    - redis-server
   tags:
     - apt
 
