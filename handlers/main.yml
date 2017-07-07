@@ -3,4 +3,3 @@
   systemd:
     name: cabot
     state: restarted
-  sudo: true

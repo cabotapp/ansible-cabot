@@ -1,12 +1,20 @@
 ---
-install_postgres: '{{ cabot_install_postgres | default(True) }}'
 
-cabot_config:
-  venv_path: /home/ubuntu/cabot.venv/
-  log_path: '{{ cabot_config_log_path | default("/var/log/cabot/") }}'
-  config_file: '{{ cabot_config_config_file | default("/etc/cabot/config") }}'
+cabot_install_postgres: yes
+cabot_db: 'cabot'
+cabot_db_user: 'cabot'
+cabot_db_pass: 'cabot'
 
-cabot:
-  version: '{{ cabot_version | default("0.10.4") }}'
+cabot_user: 'cabot'
+cabot_venv_path: '/home/{{ cabot_user }}/cabot.venv'
+cabot_log_folder: '/var/log/cabot'
 
-deploy_user: ubuntu
+cabot_config_template: 'cabot.config.j2'
+cabot_config_folder: '/home/{{ cabot_user }}/cabot.config'
+cabot_config_file: '{{ cabot_config_folder }}/config'
+
+cabot_listen_address: '127.0.0.1'
+cabot_listen_port: '5000'
+cabot_listen_workers: '5'
+
+cabot_version: '0.10.8'

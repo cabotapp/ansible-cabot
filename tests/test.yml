@@ -1,0 +1,7 @@
+---
+
+- hosts: all
+  become: yes
+  roles:
+    - role: ansible-role-cabot
+      cabot_listen_address: 0.0.0.0
