@@ -1,7 +1,7 @@
 galaxy_info:
-  author: Jean-Fred Berthelot
-  description: Install monitoring and alerting software Cabot
-  company: Arachnys
+  author: Meghea Iulian
+  description: Install Cabot
+  company: Plumelo
 
   license: MIT
 
