@@ -25,6 +25,21 @@
     - redis-server
   tags:
     - apt
+  register: apt_redis_result
+  changed_when: "'1 not fully installed or removed' in apt_redis_result.stderr"
+  failed_when: no
+
+- name: Modify redis.config
+  lineinfile:
+    path: /etc/systemd/system/redis.service
+    regexp: PrivateDevices=yes
+    line: PrivateDevices=no
+
+- name: Restart redis service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: redis.service
 
 - name: Ensure user exits
   user:
@@ -52,6 +67,7 @@
     virtualenv_site_packages: no
   become_user: '{{ cabot_user }}'
   notify: restart cabot
+  become: yes
 
 - name: Create config directory
   file:
