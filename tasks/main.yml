@@ -24,6 +24,7 @@
     - apt
 
 - include: redis.yml
+  when: cabot_install_redis
 
 - name: Ensure user exist
   user:
