@@ -3,3 +3,9 @@
   systemd:
     name: cabot
     state: restarted
+
+- name: Restart redis.service
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: redis.service
