@@ -1,6 +1,6 @@
 ---
 
-- name: restart cabot
+- name: Restart cabot
   systemd:
     name: cabot
     state: restarted
