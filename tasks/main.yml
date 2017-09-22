@@ -1,9 +1,7 @@
 ---
 
 - name: Update apt package cache
-  apt:
-    update_cache: yes
-    cache_valid_time: 86400
+  apt: update_cache=yes cache_valid_time=86400
 
 - name: Install system packages
   apt:
@@ -22,26 +20,12 @@
     - libssl-dev
     - coffeescript
     - node-less
-    - redis-server
   tags:
     - apt
-  register: apt_redis_result
-  changed_when: "'1 not fully installed or removed' in apt_redis_result.stderr"
-  failed_when: no
 
-- name: Modify redis.config
-  lineinfile:
-    path: /etc/systemd/system/redis.service
-    regexp: PrivateDevices=yes
-    line: PrivateDevices=no
+- include: redis.yml
 
-- name: Restart redis service
-  systemd:
-    state: restarted
-    daemon_reload: yes
-    name: redis.service
-
-- name: Ensure user exits
+- name: Ensure user exist
   user:
     name: '{{ cabot_user }}'
 
