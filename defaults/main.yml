@@ -5,8 +5,6 @@ cabot_db: 'cabot'
 cabot_db_user: 'cabot'
 cabot_db_pass: 'cabot'
 
-cabot_install_redis: yes
-
 cabot_user: 'cabot'
 cabot_venv_path: '/home/{{ cabot_user }}/cabot.venv'
 cabot_log_folder: '/var/log/cabot'
