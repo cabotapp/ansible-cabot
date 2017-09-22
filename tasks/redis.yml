@@ -5,9 +5,6 @@
   register: apt_redis_result
   ignore_errors: yes
 
-- debug:
-    var: apt_redis_result
-
 - name: Modify redis.config
   lineinfile:
     path: /etc/systemd/system/redis.service
