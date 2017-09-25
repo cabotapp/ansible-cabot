@@ -26,6 +26,13 @@ cabot_calendar_rota: 'http://www.google.com/calendar/ical/example.ics'
 cabot_admin_email: 'you@example.com'
 cabot_from_email: 'noreply@example'
 
+cabot_user_email_host: 'smtp.example.com'
+cabot_user_email: 'smtp.username'
+cabot_user_email_pass: 'smtp_password'
+cabot_email_port: '587'
+cabot_email_use_tls: '1'
+cabot_email_use_ssl: '0'
+
 cabot_install_redis: yes
 cabot_redis_password: 'yourredispassword'
 cabot_redis_host: 'localhost'
@@ -35,3 +42,26 @@ cabot_graphite_api: 'http://graphite.example.com/'
 cabot_graphite_user: 'username'
 cabot_graphite_password: 'password'
 cabot_http_user_agent: 'Cabot'
+
+cabot_hipchat_alert_room: 'room_name_or_id'
+cabot_hipchat_api_key: 'your_hipchat_api_key'
+
+cabot_slack_alert_channel: 'channel_name'
+cabot_slack_webhook_url: 'https://hooks.slack.com/services/XXXXXX/YYYYYY/ZZZZZZ'
+
+cabot_twilio_account_sid: 'your_account_sid'
+cabot_twilio_auth_token: 'your_auth_token'
+cabot_twilio_outgoing_number: '+14155551234'
+
+cabot_jenkins_api: 'http://jenkins.example.com'
+cabot_jenkins_user: 'username'
+cabot_jenkins_pass: 'password'
+
+cabot_auth_ldap: 'true'
+cabot_auth_ldap_server_uri: 'ldap://ldap.example.com'
+cabot_auth_ldap_bind_dn: 'cn=Manager,dc=example,dc=com'
+cabot_auth_ldap_bind_password: 'pass'
+cabot_auth_ldap_user_filter: '(uid=%(user)s)'
+cabot_auth_ldap_user_search: 'ou=People,dc=example,dc=com'
+
+
