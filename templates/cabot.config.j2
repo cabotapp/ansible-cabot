@@ -40,16 +40,16 @@ GRAPHITE_PASS={{ cabot_graphite_password }}
 HTTP_USER_AGENT={{ cabot_http_user_agent }}
 
 ## Email plugin integration
-EMAIL_HOST=smtp.example.com
+EMAIL_HOST={{ cabot_user_email_host }}
 # SMTP authentication settings. To disable SMTP authentication, comment out
 #  both EMAIL_USER and EMAIL_PASSWORD.
-EMAIL_USER=smtp_username
-EMAIL_PASSWORD=smtp_password
+EMAIL_USER={{ cabot_user_email_host }}
+EMAIL_PASSWORD={{ cabot_user_email_pass }}
 
 # Typical SMTP port 587 configuration
-EMAIL_PORT=587
-EMAIL_USE_TLS=1
-EMAIL_USE_SSL=0
+EMAIL_PORT={{ cabot_email_port }}
+EMAIL_USE_TLS={{ cabot_email_use_tls }}
+EMAIL_USE_SSL={{ cabot_email_use_ssl }}
 
 # Typical SMTP port 25 configuration (with no SSL/TLS)
 # EMAIL_PORT=587
@@ -57,31 +57,31 @@ EMAIL_USE_SSL=0
 # EMAIL_USE_SSL=0
 
 ## Hipchat plugin integration
-HIPCHAT_ALERT_ROOM=room_name_or_id
-HIPCHAT_API_KEY=your_hipchat_api_key
+HIPCHAT_ALERT_ROOM={{ cabot_hipchat_alert_room }}
+HIPCHAT_API_KEY={{ cabot_hipchat_api_key }}
 
 ## SLACK
-SLACK_ALERT_CHANNEL=channel_name
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/XXXXXX/YYYYYY/ZZZZZZ
+SLACK_ALERT_CHANNEL={{ cabot_slack_alert_channel }}
+SLACK_WEBHOOK_URL={{ cabot_slack_webhook_url }}
 # SLACK_INTERACTIVE_MESSAGE=True # uncomment if you have cabot added as an app with interactive messages enabled
 
 ## Twilio plugin integration (for SMS and telephone alerts)
-TWILIO_ACCOUNT_SID=your_account_sid
-TWILIO_AUTH_TOKEN=your_auth_token
-TWILIO_OUTGOING_NUMBER=+14155551234
+TWILIO_ACCOUNT_SID={{ cabot_twilio_account_sid }}
+TWILIO_AUTH_TOKEN={{ cabot_twilio_auth_token }}
+TWILIO_OUTGOING_NUMBER={{ cabot_twilio_outgoing_number }}
 
 ## Jenkins integration
-JENKINS_API=https://jenkins.example.com/
-JENKINS_USER=username
-JENKINS_PASS=password
+JENKINS_API={{ cabot_jenkins_user }}
+JENKINS_USER={{ cabot_jenkins_user }}
+JENKINS_PASS={{ cabot_jenkins_pass }}
 
 ## Use for LDAP authentication
-AUTH_LDAP=true
-AUTH_LDAP_SERVER_URI=ldap://ldap.example.com
-AUTH_LDAP_BIND_DN="cn=Manager,dc=example,dc=com"
-AUTH_LDAP_BIND_PASSWORD=""
-AUTH_LDAP_USER_FILTER="(uid=%(user)s)"
-AUTH_LDAP_USER_SEARCH="ou=People,dc=example,dc=com"
+AUTH_LDAP={{ cabot_auth_ldap }}
+AUTH_LDAP_SERVER_URI={{ cabot_auth_ldap_server_uri }}
+AUTH_LDAP_BIND_DN={{ cabot_auth_ldap_bind_password }}
+AUTH_LDAP_BIND_PASSWORD={{ cabot_auth_ldap }}
+AUTH_LDAP_USER_FILTER={{ cabot_auth_ldap_user_filter }}
+AUTH_LDAP_USER_SEARCH={{ cabot_auth_ldap_user_search }}
 
 ###########################################################################
 ## You shouldn't need to change anything below this line                  #
