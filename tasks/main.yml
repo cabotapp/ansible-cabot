@@ -51,7 +51,7 @@
     virtualenv: '{{cabot_venv_path}}'
     virtualenv_site_packages: no
   become_user: '{{ cabot_user }}'
-  notify: restart cabot
+  notify: Restart cabot
   become: yes
 
 - name: Create config directory
@@ -68,7 +68,7 @@
     owner: '{{ cabot_user }}'
     mode: 0644
     validate: "/bin/bash -c '. %s'"
-  notify: restart cabot
+  notify: Restart cabot
   tags:
     - config
 
@@ -80,7 +80,7 @@
     - cabot
     - cabot-worker
     - cabot-beat
-  notify: restart cabot
+  notify: Restart cabot
   tags:
     - systemd
 
