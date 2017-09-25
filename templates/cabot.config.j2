@@ -1,11 +1,11 @@
 ## Cabot UI URL setup
 # Base path to include before generated URLs.  If not defined, uses `/`
-# URL_PREFIX=/
+URL_PREFIX={{ cabot_url_prefix }}
 
 # Used for pointing links back in alerts etc.
 WWW_HTTP_HOST={{ cabot_www_http_host }}
 # Probable values: http, https
-WWW_SCHEME=http
+WWW_SCHEME={{ cabot_www_scheme }}
 
 ## Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -22,7 +22,7 @@ CABOT_FROM_EMAIL={{ cabot_from_email }}
 CELERY_BROKER_URL=redis://:{{ cabot_redis_password }}@{{ cabot_redis_host }}:{{ cabot_redis_port }}
 # Create a random string of mixed case alphanumeric characters, > 40 chars.
 # https://www.browserling.com/tools/random-string is a site that can do this
-DJANGO_SECRET_KEY=CREATE_A_KEY
+DJANGO_SECRET_KEY={{ cabot_django_secret_key }}
 
 ## Graphite server settings
 # Hostname of your Graphite server instance (including trailing slash)
@@ -34,7 +34,7 @@ GRAPHITE_PASS={{ cabot_graphite_password }}
 # failures. This setting determines how many minutes back a test should
 # evaluate.
 # If not defined, evaluate 'now through 10 minutes ago' (-10minute)
-# GRAPHITE_FROM=-10minute
+GRAPHITE_FROM={{ cabot_graphite_from }}
 
 ## User-Agent string used for Cabot HTTP checks
 HTTP_USER_AGENT={{ cabot_http_user_agent }}
@@ -63,7 +63,7 @@ HIPCHAT_API_KEY={{ cabot_hipchat_api_key }}
 ## SLACK
 SLACK_ALERT_CHANNEL={{ cabot_slack_alert_channel }}
 SLACK_WEBHOOK_URL={{ cabot_slack_webhook_url }}
-# SLACK_INTERACTIVE_MESSAGE=True # uncomment if you have cabot added as an app with interactive messages enabled
+SLACK_INTERACTIVE_MESSAGE=True # uncomment if you have cabot added as an app with interactive messages enabled
 
 ## Twilio plugin integration (for SMS and telephone alerts)
 TWILIO_ACCOUNT_SID={{ cabot_twilio_account_sid }}
@@ -88,7 +88,7 @@ AUTH_LDAP_USER_SEARCH={{ cabot_auth_ldap_user_search }}
 ###########################################################################
 
 ## Plugins to be loaded at launch
-# CABOT_PLUGINS_ENABLED=cabot_alert_email,cabot_alert_hipchat,cabot_alert_twilio,cabot_alert_slack
+CABOT_PLUGINS_ENABLED=cabot_alert_email,cabot_alert_hipchat,cabot_alert_twilio,cabot_alert_slack
 
 ## Database settings
 DATABASE_URL=postgres://{{ cabot_db_user }}:{{ cabot_db_pass  }}@localhost:5432/{{ cabot_db }}
