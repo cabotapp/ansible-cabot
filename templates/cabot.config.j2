@@ -3,32 +3,32 @@
 # URL_PREFIX=/
 
 # Used for pointing links back in alerts etc.
-WWW_HTTP_HOST=cabot.example.com
+WWW_HTTP_HOST={{ cabot_www_http_host }}
 # Probable values: http, https
 WWW_SCHEME=http
 
 ## Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-TIME_ZONE=Etc/UTC
+TIME_ZONE={{ cabot_time_zone }}
 
 ## URL of calendar to synchronise rota with
-CALENDAR_ICAL_URL=http://www.google.com/calendar/ical/example.ics
+CALENDAR_ICAL_URL={{ cabot_calendar_rota }}
 
 ## Django admin email, 'from' address for email alerts
-ADMIN_EMAIL=you@example.com
-CABOT_FROM_EMAIL=noreply@example.com
+ADMIN_EMAIL={{ cabot_admin_email }}
+CABOT_FROM_EMAIL={{ cabot_from_email }}
 
 ## Django settings
-CELERY_BROKER_URL=redis://:yourredispassword@localhost:6379/1
+CELERY_BROKER_URL=redis://:{{ cabot_redis_password }}@{{ cabot_redis_host }}:{{ cabot_redis_port }}
 # Create a random string of mixed case alphanumeric characters, > 40 chars.
 # https://www.browserling.com/tools/random-string is a site that can do this
 DJANGO_SECRET_KEY=CREATE_A_KEY
 
 ## Graphite server settings
 # Hostname of your Graphite server instance (including trailing slash)
-GRAPHITE_API=http://graphite.example.com/
-GRAPHITE_USER=username
-GRAPHITE_PASS=password
+GRAPHITE_API={{ cabot_graphite_api }}
+GRAPHITE_USER={{ cabot_graphite_user }}
+GRAPHITE_PASS={{ cabot_graphite_password }}
 
 # Graphite stats are evaluated through a time period to identify transient
 # failures. This setting determines how many minutes back a test should
@@ -37,7 +37,7 @@ GRAPHITE_PASS=password
 # GRAPHITE_FROM=-10minute
 
 ## User-Agent string used for Cabot HTTP checks
-HTTP_USER_AGENT=Cabot
+HTTP_USER_AGENT={{ cabot_http_user_agent }}
 
 ## Email plugin integration
 EMAIL_HOST=smtp.example.com
