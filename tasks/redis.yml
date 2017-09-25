@@ -3,13 +3,13 @@
 - name: Apt install redis-server
   apt: pkg=redis-server
   register: apt_redis_result
-  ignore_errors: yes
+  ignore_errors: true
 
 - name: Modify redis.config
   lineinfile:
     path: /etc/systemd/system/redis.service
     regexp: PrivateDevices=yes
     line: PrivateDevices=no
-  when: apt_redis_result.failed
+  when: apt_redis_result.failed|default(false)
   notify:
     - Restart redis.service
