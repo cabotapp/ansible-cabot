@@ -2,6 +2,12 @@
 
 - hosts: all
   become: yes
+  vars:
+    cabot_url_prefix: '/cabot'
+    cabot_db: 'dbtest'
+    cabot_db_user: 'dbuser'
+    cabot_db_pass: '1234'
+    cabot_www_scheme: 'https'
   roles:
     - role: ansible-role-cabot
       cabot_listen_address: 0.0.0.0
