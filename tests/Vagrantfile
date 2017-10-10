@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
   config.vm.hostname = "cabot"
-  config.vm.box = "kapke/xenial64-lxc"
+  config.vm.box = "plumelo/xenial64"
 
   config.vm.provider :lxc do |lxc, override|
     lxc.container_name = "cabot"
