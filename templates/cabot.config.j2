@@ -88,7 +88,7 @@ AUTH_LDAP_USER_SEARCH={{ cabot_auth_ldap_user_search }}
 ###########################################################################
 
 ## Plugins to be loaded at launch
-CABOT_PLUGINS_ENABLED={{ cabot_plugins_enabled }}
+CABOT_PLUGINS_ENABLED={{ (cabot_plugins)|join(',') }}
 
 ## Database settings
 DATABASE_URL=postgres://{{ cabot_db_user }}:{{ cabot_db_pass  }}@localhost:5432/{{ cabot_db }}

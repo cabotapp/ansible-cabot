@@ -76,4 +76,3 @@ cabot_plugins:
   - cabot_alert_hipchat
   - cabot_alert_twilio
   - cabot_alert_slack
-cabot_plugins_enabled: "{{ (cabot_plugins)|join(',') }}"
