@@ -20,7 +20,7 @@ cabot_listen_address: '127.0.0.1'
 cabot_listen_port: '5000'
 cabot_listen_workers: '5'
 
-cabot_version: '0.10.8'
+cabot_version: '0.11.8'
 
 cabot_www_http_host: 'cabot.example.com'
 cabot_www_scheme: 'http'
@@ -72,9 +72,5 @@ cabot_auth_ldap_user_filter: '"(uid=%(user)s)"'
 cabot_auth_ldap_user_search: '"ou=People,dc=example,dc=com"'
 
 cabot_plugins: []
-#   - cabot_alert_email
-#   - cabot_alert_hipchat
-#   - cabot_alert_twilio
-#   - cabot_alert_slack
 
 cabot_debug: 'False'
