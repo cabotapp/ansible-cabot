@@ -56,6 +56,7 @@ cabot_plugins:
 
 ```yaml
 - hosts: all
+  become: yes
   vars:
     cabot_plugins:
       - cabot_alert_email
