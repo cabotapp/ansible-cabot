@@ -52,6 +52,18 @@ cabot_plugins:
   - cabot_alert_slack
 ```
 
+## Example
+
+```yaml
+- hosts: all
+  vars:
+    cabot_plugins:
+      - cabot_alert_email
+      - cabot_alert_hipchat
+  roles:
+    - role: ansible-role-cabot
+      cabot_listen_address: 0.0.0.0
+```
 
 ## Issues
 
