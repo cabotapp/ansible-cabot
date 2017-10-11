@@ -11,7 +11,7 @@ An Ansible role to deploy Cabot using the Python packages.
 
 ## Role Variables
 
-```
+```yaml
 # The cabot version
 cabot_version: '0.11.8'
 
