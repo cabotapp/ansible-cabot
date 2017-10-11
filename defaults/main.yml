@@ -28,10 +28,10 @@ cabot_www_scheme: 'http'
 cabot_time_zone: 'Etc/UTC'
 cabot_calendar_rota: 'http://www.google.com/calendar/ical/example.ics'
 cabot_admin_email: 'you@example.com'
-cabot_from_email: 'noreply@example'
+cabot_from_email: 'noreply@example.com'
 
 cabot_user_email_host: 'smtp.example.com'
-cabot_user_email: 'smtp.username'
+cabot_user_email: 'smtp_username'
 cabot_user_email_pass: 'smtp_password'
 cabot_email_port: '587'
 cabot_email_use_tls: '1'
@@ -54,7 +54,7 @@ cabot_hipchat_api_key: 'your_hipchat_api_key'
 
 cabot_slack_alert_channel: 'channel_name'
 cabot_slack_webhook_url: 'https://hooks.slack.com/services/XXXXXX/YYYYYY/ZZZZZZ'
-cabot_slack_interactive_message: 'true'
+cabot_slack_interactive_message: 'False'
 
 cabot_twilio_account_sid: 'your_account_sid'
 cabot_twilio_auth_token: 'your_auth_token'
@@ -66,13 +66,15 @@ cabot_jenkins_pass: 'password'
 
 cabot_auth_ldap: 'true'
 cabot_auth_ldap_server_uri: 'ldap://ldap.example.com'
-cabot_auth_ldap_bind_dn: 'cn=Manager,dc=example,dc=com'
-cabot_auth_ldap_bind_password: 'pass'
-cabot_auth_ldap_user_filter: '(uid=%(user)s)'
-cabot_auth_ldap_user_search: 'ou=People,dc=example,dc=com'
+cabot_auth_ldap_bind_dn: '"cn=Manager,dc=example,dc=com"'
+cabot_auth_ldap_bind_password: '""'
+cabot_auth_ldap_user_filter: '"(uid=%(user)s)"'
+cabot_auth_ldap_user_search: '"ou=People,dc=example,dc=com"'
 
-cabot_plugins:
-  - cabot_alert_email
-  - cabot_alert_hipchat
-  - cabot_alert_twilio
-  - cabot_alert_slack
+cabot_plugins: []
+#   - cabot_alert_email
+#   - cabot_alert_hipchat
+#   - cabot_alert_twilio
+#   - cabot_alert_slack
+
+cabot_debug: 'False'
