@@ -58,6 +58,7 @@ cabot_plugins:
 - hosts: all
   become: yes
   vars:
+    cabot_user: 'cabot'
     cabot_plugins:
       - cabot_alert_email
       - cabot_alert_hipchat
