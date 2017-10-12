@@ -6,7 +6,8 @@
     update_cache: no
   with_items:
     - postgresql
-    - postgresql-contrib
+    - ca-certificates
+    - pgadmin3
 
 - name: Install python-psycopg
   pip:
