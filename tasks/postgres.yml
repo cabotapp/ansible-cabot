@@ -6,6 +6,7 @@
     update_cache: no
   with_items:
     - postgresql
+    - postgresql-contrib
 
 - name: Install python-psycopg
   pip:
