@@ -2,7 +2,7 @@
 
 cabot_url_prefix: '/'
 
-cabot_install_postgres: yes
+cabot_install_postgres: no
 cabot_db: 'cabot'
 cabot_db_user: 'cabot'
 cabot_db_pass: 'cabot'

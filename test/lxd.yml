@@ -1,0 +1,31 @@
+---
+
+- hosts: localhost
+  become: yes
+  roles:
+    - role: plumelo.lxd
+      lxd_packages:
+        - lxd
+      lxd_users:
+        - travis
+      lxd_dns_ipv4: '10.229.31.1'
+      lxd_prepend_dns:
+        - '{{ lxd_dns_ipv4 }}'
+      lxd_default_bridge_ipv4_address: '{{ lxd_dns_ipv4 }}/24'
+      lxd_default_pool_driver: dir
+      lxd_default_pool_config: {}
+      cloud_config:
+        hostname: xenial
+        manage_etc_hosts: true
+        packages:
+          - python
+          - acl
+      lxd_containers:
+        - name: xenial
+          state: started
+          become: no
+          alias: 'x'
+          config:
+            user.user-data: "#cloud-config\n{{ cloud_config|to_yaml(indent=2) }}"
+          devices: {}
+          timeout: 600

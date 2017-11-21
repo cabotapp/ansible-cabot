@@ -1,27 +1,21 @@
 ---
 
-language: python
-python: "2.7"
-before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq python-apt python-pycurl
-# Use the new container infrastructure
 sudo: required
-
-# Install ansible
-install:
-  - pip install ansible ansible-lint
-  - ansible --version
-
+language: python
+python:
+  - "2.7"
 script:
-  - ansible-lint tasks/main.yml
-  - ansible-playbook -i test/inventory --syntax-check --list-tasks test/test.yml
-  - ansible-playbook -i test/inventory --connection=local --become -vvvv test/test.yml -u root
+  - sudo groupadd lxd
+  - sudo usermod -a -G lxd travis
+  - pip install ansible;
+  - ansible-galaxy install --role-file test/galaxy.yml
+  - sudo su travis -c 'source ~/virtualenv/python2.7/bin/activate; ansible-playbook -i test/inventory -vvvv test/lxd.yml'
+  - sleep 20s
+  - sudo su travis -c 'source ~/virtualenv/python2.7/bin/activate; ansible-playbook -i test/inventory -vvvv test/test.yml --limit xenial'
   - >
-      ansible-playbook -i test/inventory --connection=local --become -vvvv test/test.yml -u root
+      sudo su travis -c 'source ~/virtualenv/python2.7/bin/activate; ansible-playbook -i test/inventory -vvvv test/test.yml --limit xenial'
       | grep -q 'changed=0.*failed=0'
       && (echo 'Idempotence test: pass' && exit 0)
       || (echo 'Idempotence test: fail' && exit 1)
-
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
