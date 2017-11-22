@@ -1,3 +1,4 @@
 localhost ansible_connection=local
 xenial ansible_connection=lxd
+stretch ansible_connection=lxd
 
