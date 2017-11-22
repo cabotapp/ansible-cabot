@@ -1,4 +1,5 @@
 # ansible-cabot
+[![Build Status](https://travis-ci.org/plumelo/ansible-role-cabot)](https://travis-ci.org/plumelo/ansible-role-cabot)
 [![Galaxy](https://img.shields.io/badge/role-cabotapp.cabot-blue.svg?style=flat-square)](https://galaxy.ansible.com/cabotapp/cabot/)
 
 
