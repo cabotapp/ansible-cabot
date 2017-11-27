@@ -23,7 +23,7 @@
       lxd_containers:
         - name: xenial
           state: started
-          become: no
+          become_user: travis
           alias: 'x'
           config:
             user.user-data: "#cloud-config\n{{ cloud_config|combine({'hostname': 'xenial'})|to_yaml(indent=2) }}"
@@ -31,7 +31,7 @@
           timeout: 600
         - name: stretch
           state: started
-          become: no
+          become_user: travis
           alias: 'debian/stretch'
           server: https://us.images.linuxcontainers.org
           config:
