@@ -1,12 +1,76 @@
 ---
-install_postgres: '{{ cabot_install_postgres | default(True) }}'
 
-cabot_config:
-  venv_path: /home/ubuntu/cabot.venv/
-  log_path: '{{ cabot_config_log_path | default("/var/log/cabot/") }}'
-  config_file: '{{ cabot_config_config_file | default("/etc/cabot/config") }}'
+cabot_url_prefix: '/'
 
-cabot:
-  version: '{{ cabot_version | default("0.10.4") }}'
+cabot_install_postgres: no
+cabot_db: 'cabot'
+cabot_db_user: 'cabot'
+cabot_db_pass: 'cabot'
 
-deploy_user: ubuntu
+
+cabot_user: 'cabot'
+cabot_venv_path: '/home/{{ cabot_user }}/cabot.venv'
+cabot_log_folder: '/var/log/cabot'
+
+cabot_config_template: 'cabot.config.j2'
+cabot_config_folder: '/home/{{ cabot_user }}/cabot.config'
+cabot_config_file: '{{ cabot_config_folder }}/config'
+
+cabot_listen_address: '127.0.0.1'
+cabot_listen_port: '5000'
+cabot_listen_workers: '5'
+
+cabot_version: '0.11.8'
+
+cabot_www_http_host: 'cabot.example.com'
+cabot_www_scheme: 'http'
+
+cabot_time_zone: 'Etc/UTC'
+cabot_calendar_rota: 'http://www.google.com/calendar/ical/example.ics'
+cabot_admin_email: 'you@example.com'
+cabot_from_email: 'noreply@example.com'
+
+cabot_user_email_host: 'smtp.example.com'
+cabot_user_email: 'smtp_username'
+cabot_user_email_pass: 'smtp_password'
+cabot_email_port: '587'
+cabot_email_use_tls: '1'
+cabot_email_use_ssl: '0'
+
+cabot_install_redis: yes
+cabot_redis_password: 'yourredispassword'
+cabot_redis_host: 'localhost'
+cabot_redis_port: '6379/1'
+cabot_django_secret_key: 'CREATE_A_KEY'
+
+cabot_graphite_api: 'http://graphite.example.com/'
+cabot_graphite_user: 'username'
+cabot_graphite_password: 'password'
+cabot_http_user_agent: 'Cabot'
+cabot_graphite_from: '-10minute'
+
+cabot_hipchat_alert_room: 'room_name_or_id'
+cabot_hipchat_api_key: 'your_hipchat_api_key'
+
+cabot_slack_alert_channel: 'channel_name'
+cabot_slack_webhook_url: 'https://hooks.slack.com/services/XXXXXX/YYYYYY/ZZZZZZ'
+cabot_slack_interactive_message: 'False'
+
+cabot_twilio_account_sid: 'your_account_sid'
+cabot_twilio_auth_token: 'your_auth_token'
+cabot_twilio_outgoing_number: '+14155551234'
+
+cabot_jenkins_api: 'http://jenkins.example.com'
+cabot_jenkins_user: 'username'
+cabot_jenkins_pass: 'password'
+
+cabot_auth_ldap: 'true'
+cabot_auth_ldap_server_uri: 'ldap://ldap.example.com'
+cabot_auth_ldap_bind_dn: '"cn=Manager,dc=example,dc=com"'
+cabot_auth_ldap_bind_password: '""'
+cabot_auth_ldap_user_filter: '"(uid=%(user)s)"'
+cabot_auth_ldap_user_search: '"ou=People,dc=example,dc=com"'
+
+cabot_plugins: []
+
+cabot_debug: 'False'

@@ -1,9 +1,14 @@
 ---
+
+- name: Update apt package cache
+  apt: update_cache=yes cache_valid_time=86400
+
 - name: Install system packages
   apt:
     pkg: '{{ item }}'
     update_cache: no
   with_items:
+    - acl
     - gcc
     - git
     - python-dev
@@ -13,45 +18,57 @@
     - libldap2-dev
     - libffi-dev
     - libssl-dev
+    - coffeescript
+    - node-less
   tags:
     - apt
 
+- include: redis.yml
+  when: cabot_install_redis
+
+- name: Ensure user exist
+  user:
+    name: '{{ cabot_user }}'
+
 - name: Ensure log directory exists
   file:
-    path: '{{ cabot_config.log_path }}'
+    path: '{{ cabot_log_folder }}'
     state: directory
+    owner: '{{ cabot_user }}'
     mode: 0777
 
 - include: postgres.yml
-  when: install_postgres
+  when: cabot_install_postgres
 
 - name: Install virtualenv
   pip:
     name: virtualenv
-  become: True
+  become: yes
 
 - name: Install Cabot from pip
   pip:
-    name: "cabot=={{ cabot.version }}"
-    virtualenv: '{{cabot_config.venv_path}}'
+    name: 'cabot=={{ cabot_version }}'
+    virtualenv: '{{cabot_venv_path}}'
     virtualenv_site_packages: no
-  notify: restart cabot
+  become_user: '{{ cabot_user }}'
+  notify: Restart cabot
+  become: yes
 
 - name: Create config directory
   file:
-    path: '/etc/cabot/'
+    path: '{{cabot_config_folder}}'
     state: directory
   tags:
     - config
 
 - name: Deploy Cabot config file
   template:
-    src: '{{ cabot_config_file_path }}'
-    dest: '{{ cabot_config.config_file }}'
-    owner: '{{ deploy_user }}'
+    src: '{{ cabot_config_template }}'
+    dest: '{{ cabot_config_file }}'
+    owner: '{{ cabot_user }}'
     mode: 0644
     validate: "/bin/bash -c '. %s'"
-  notify: restart cabot
+  notify: Restart cabot
   tags:
     - config
 
@@ -63,7 +80,7 @@
     - cabot
     - cabot-worker
     - cabot-beat
-  notify: restart cabot
+  notify: Restart cabot
   tags:
     - systemd
 

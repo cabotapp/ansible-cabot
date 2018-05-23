@@ -1,4 +1,5 @@
 ---
+
 - name: Install postgresql
   apt:
     pkg: '{{ item }}'
@@ -13,9 +14,8 @@
 
 - name: Create database user
   postgresql_user:
-    name: cabot
-    password: cabot
-    # role_attr_flags: NOCREATEDB,NOCREATEUSER
+    name: '{{ cabot_db_user }}'
+    password: '{{ cabot_db_pass }}'
     encrypted: yes
     state: present
     fail_on_user: no
@@ -26,8 +26,8 @@
 
 - name: Create database
   postgresql_db:
-    name: index
-    owner: cabot
+    name: '{{ cabot_db }}'
+    owner: '{{ cabot_db_user }}'
   become: yes
   become_user: postgres
   tags:

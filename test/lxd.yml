@@ -1,0 +1,40 @@
+---
+
+- hosts: localhost
+  become: yes
+  roles:
+    - role: plumelo.lxd
+      lxd_packages:
+        - lxd
+      lxd_users:
+        - travis
+      lxd_dns_ipv4: '10.229.31.1'
+      lxd_prepend_dns:
+        - '{{ lxd_dns_ipv4 }}'
+      lxd_default_bridge_ipv4_address: '{{ lxd_dns_ipv4 }}/24'
+      lxd_default_pool_driver: dir
+      lxd_default_pool_config: {}
+      cloud_config:
+        manage_etc_hosts: true
+        packages:
+          - python
+          - acl
+          - sudo
+      lxd_containers:
+        - name: xenial
+          state: started
+          become_user: travis
+          alias: 'x'
+          config:
+            user.user-data: "#cloud-config\n{{ cloud_config|combine({'hostname': 'xenial'})|to_yaml(indent=2) }}"
+          devices: {}
+          timeout: 600
+        - name: stretch
+          state: started
+          become_user: travis
+          alias: 'debian/stretch'
+          server: https://us.images.linuxcontainers.org
+          config:
+            user.user-data: "#cloud-config\n{{ cloud_config|combine({'hostname': 'stretch'})|to_yaml(indent=2) }}"
+          devices: {}
+          timeout: 600
